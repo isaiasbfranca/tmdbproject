@@ -10,7 +10,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-    const result = await fetch(`${apiBase}/trending/all/week?api_key=${apiKey}&language=pt-BR`);
+    const result = await fetch(`${apiBase}/trending/all/day?api_key=${apiKey}&language=pt-BR`);
     const json = await result.json();
     res.status(200).json({
         list: json.results

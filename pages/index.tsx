@@ -4,10 +4,20 @@ import Link from 'next/link'
 import Header from '../components/Header'
 
 interface Props {
-  list: []
+  listWeek: [],
+  listDay: [],
 }
 
-const Home = ({ list }: Props) => {
+const Home = ({ listWeek, listDay }: Props) => {
+
+  const destaqueSemana = listWeek?.map((item: any) => (
+      <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="120" />
+  ));
+
+  const destaqueDia = listDay?.map((item: any) => (
+    <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="120" />
+));
+
   return (
     <div className="flex min-h-screen flex-col items-center">
       <Head>
@@ -18,6 +28,20 @@ const Home = ({ list }: Props) => {
         Seja bem vindo
       </h1>
 
+      <div>
+        <h1>Destaques da semana</h1>
+        <div className="flex gap-x-8 overflow-auto">
+          {destaqueSemana}
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <h1>Destaques da dia</h1>
+        <div className="flex gap-x-8 overflow-auto">
+          {destaqueDia}
+        </div>
+      </div>
+
     </div>
   )
 }
@@ -25,12 +49,16 @@ const Home = ({ list }: Props) => {
 export default Home
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/trending');
-  const json = await res.json();
+  const resWeek = await fetch('http://localhost:3000/api/trending');
+  const resDay = await fetch('http://localhost:3000/api/trendingDay');
+  
+  const jsonWeek = await resWeek.json();
+  const jsonDay = await resDay.json();
 
   return {
     props: {
-      list: json.list
+      listWeek: jsonWeek.list,
+      listDay: jsonDay.list,
     }
   }
 }
