@@ -38,7 +38,7 @@ const Busca = ({ list }: Props) => {
 
           <ul className="list-none m-0">
               {movieList.map((item: any) => (
-                  <li className="inline-block m-5">
+                  <li key={item.id} className="inline-block m-5">
                   <Link href={`/movie/${item.id}`}>
                     <>
                       <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="150" /><br />

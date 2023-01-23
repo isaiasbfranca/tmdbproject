@@ -18,6 +18,12 @@ module.exports = {
           default: '#F54952',
           dark: '#660F56',
         }
+      },
+      backgroundImage: {
+        'background': "url('../public/background.jpg')"
+      },
+      boxShadow: {
+        'newShadow': '0 2px 8px rgb(0 0 0 / 10%)'
       }
     },
   },
